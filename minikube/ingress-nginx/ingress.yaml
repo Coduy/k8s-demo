@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: example-ingress
+spec:
+ rules:
+ - host: nginx-hello.info
+   http:
+     paths:
+     - pathType: Prefix
+       path: "/vamos.txt"
+       backend:
+         service:
+           name: nginx-2
+           port:
+             number: 80
+     - pathType: Prefix
+       path: "/"
+       backend:
+         service:
+           name: nginx
+           port:
+             number: 80            
+ - host: nginx-2-hello.info
+   http:
+     paths:
+     - pathType: Prefix
+       path: "/"
+       backend:
+         service:
+           name: nginx-2
+           port:
+             number: 80                          
